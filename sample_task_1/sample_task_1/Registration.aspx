@@ -19,9 +19,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td> Name </td>
+                    <td> Password </td>
                     <td>
-                        <asp:TextBox ID="txtName" Width="150px" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtPass" Width="150px" runat="server"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>

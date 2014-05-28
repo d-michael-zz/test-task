@@ -1373,10 +1373,10 @@ namespace DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public usersRow AddusersRow(int user_id, string email, string password) {
+            public usersRow AddusersRow(string email, string password) {
                 usersRow rowusersRow = ((usersRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        user_id,
+                        null,
                         email,
                         password};
                 rowusersRow.ItemArray = columnValuesArray;
@@ -1424,6 +1424,9 @@ namespace DAL {
                 base.Columns.Add(this.columnpassword);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnuser_id}, true));
+                this.columnuser_id.AutoIncrement = true;
+                this.columnuser_id.AutoIncrementSeed = -1;
+                this.columnuser_id.AutoIncrementStep = -1;
                 this.columnuser_id.AllowDBNull = false;
                 this.columnuser_id.Unique = true;
                 this.columnemail.AllowDBNull = false;
@@ -3417,13 +3420,13 @@ SELECT book_id, author_id FROM books_authors WHERE (author_id = @author_id) AND 
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_password", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "password", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [users] ([user_id], [email], [password]) VALUES (@user_id, @email, @p" +
-                "assword);\r\nSELECT user_id, email, password FROM users WHERE (user_id = @user_id)" +
-                "";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO users\r\n                         (email, password)\r\nVALUES        (@em" +
+                "ail,@password); \r\nSELECT user_id, email, password FROM users WHERE (user_id = @u" +
+                "ser_id)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@user_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "user_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@email", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "email", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@password", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@email", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "email", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@password", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@user_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "user_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = @"UPDATE [users] SET [user_id] = @user_id, [email] = @email, [password] = @password WHERE (([user_id] = @Original_user_id) AND ([email] = @Original_email) AND ([password] = @Original_password));
@@ -3545,20 +3548,20 @@ SELECT user_id, email, password FROM users WHERE (user_id = @user_id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int user_id, string email, string password) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(user_id));
+        public virtual int Insert(string email, string password, int user_id) {
             if ((email == null)) {
                 throw new global::System.ArgumentNullException("email");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(email));
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(email));
             }
             if ((password == null)) {
                 throw new global::System.ArgumentNullException("password");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(password));
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(password));
             }
+            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(user_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {

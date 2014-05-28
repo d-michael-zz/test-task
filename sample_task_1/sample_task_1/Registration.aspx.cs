@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BAL;
 
 namespace sample_task_1
 {
@@ -17,12 +18,13 @@ namespace sample_task_1
         protected void BtnSave_Click(object sender, EventArgs e)
         {
             string email = txtMail.Text;
-            string name = txtName.Text;
+            string pass = txtPass.Text;
 
-            int result = 0;
-            //result = pBAL.Insert(email, name);
+            bool result = false; 
+            UsersBAL usersLogic = new UsersBAL();
+            result = usersLogic.AddUser(email, pass);
 
-            if (result > 0)
+            if (result == true)
                 Label1.Text = "User added";
         }
     }

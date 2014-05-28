@@ -8,36 +8,32 @@
   <Shapes>
     <Shape ID="DesignTable:books" ZOrder="7" X="95" Y="120" Height="134" Width="179" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
     <Shape ID="DesignTable:authors" ZOrder="6" X="353" Y="217" Height="115" Width="189" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
-    <Shape ID="DesignTable:books_authors" ZOrder="5" X="118" Y="356" Height="115" Width="229" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
-    <Shape ID="DesignTable:users" ZOrder="2" X="395" Y="380" Height="134" Width="174" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
-    <Shape ID="DesignTable:books_history" ZOrder="1" X="104" Y="501" Height="172" Width="225" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="121" />
+    <Shape ID="DesignTable:books_authors" ZOrder="5" X="94" Y="278" Height="115" Width="229" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
+    <Shape ID="DesignTable:users" ZOrder="2" X="356" Y="374" Height="134" Width="174" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
+    <Shape ID="DesignTable:books_history" ZOrder="1" X="95" Y="415" Height="172" Width="225" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="121" />
   </Shapes>
   <Connectors>
     <Connector ID="DesignRelation:FK_books_authors_authors" ZOrder="4" LineWidth="11">
       <RoutePoints>
         <Point>
-          <X>370</X>
-          <Y>332</Y>
+          <X>353</X>
+          <Y>305</Y>
         </Point>
         <Point>
-          <X>370</X>
-          <Y>373</Y>
-        </Point>
-        <Point>
-          <X>347</X>
-          <Y>373</Y>
+          <X>323</X>
+          <Y>305</Y>
         </Point>
       </RoutePoints>
     </Connector>
     <Connector ID="DesignRelation:FK_books_authors_books" ZOrder="3" LineWidth="11">
       <RoutePoints>
         <Point>
-          <X>196</X>
+          <X>172</X>
           <Y>254</Y>
         </Point>
         <Point>
-          <X>196</X>
-          <Y>356</Y>
+          <X>172</X>
+          <Y>278</Y>
         </Point>
       </RoutePoints>
     </Connector>
