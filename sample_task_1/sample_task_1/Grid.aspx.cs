@@ -61,7 +61,7 @@ namespace sample_task_1
 
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.Header)
+            /*if (e.Row.RowType == DataControlRowType.Header)
             {
                 LinkButton LnkHeaderText = e.Row.Cells[0].Controls[0] as LinkButton;
                 LnkHeaderText.Text = "Book";
@@ -69,7 +69,7 @@ namespace sample_task_1
                 LnkHeaderText2.Text = "Author";
                 LinkButton LnkHeaderText3 = e.Row.Cells[2].Controls[0] as LinkButton;
                 LnkHeaderText3.Text = "Temp_name";
-            }
+            }*/
         }
     }
 

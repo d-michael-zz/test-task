@@ -9,6 +9,9 @@
 }
 
 namespace DAL.DataSet1TableAdapters {
+    partial class usersTableAdapter
+    {
+    }
     
     
     public partial class booksTableAdapter {
