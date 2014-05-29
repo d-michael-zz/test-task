@@ -2,6 +2,10 @@
     
     
     public partial class DataSet1 {
+        partial class booksDataTable
+        {
+        }
+    
         partial class usersDataTable
         {
         }

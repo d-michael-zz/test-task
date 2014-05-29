@@ -16,7 +16,8 @@ namespace sample_task_1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            BooksBAL booksLogic = new BooksBAL();
+            //BooksBAL booksLogic = new BooksBAL();
+            GridBAL booksLogic = new GridBAL();
             GridView1.DataSource = booksLogic.GetData();
             GridView1.DataBind();
         }
@@ -52,7 +53,8 @@ namespace sample_task_1
 
         private void SortGridView(string sortExpression, string direction)
         {
-            BooksBAL booksLogic = new BooksBAL();
+            //BooksBAL booksLogic = new BooksBAL();
+            GridBAL booksLogic = new GridBAL();
             DataView myDataView = new DataView(booksLogic.GetData());
             myDataView.Sort = sortExpression + direction;
             GridView1.DataSource = myDataView;

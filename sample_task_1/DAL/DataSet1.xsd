@@ -4,7 +4,7 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="sample_task_dbConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="sample_task_dbConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.DAL.Properties.Settings.GlobalReference.Default.sample_task_dbConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="sample_task_dbConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="sample_task_dbConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.DAL.Properties.Settings.GlobalReference.Default.sample_task_dbConnectionString" Provider="System.Data.SqlClient" />
           <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="sample_task_dbConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="sample_task_dbConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.DAL.Properties.Settings.GlobalReference.Default.sample_task_dbConnectionString1" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
@@ -245,6 +245,29 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="gridTableAdapter" GeneratorDataComponentClassName="gridTableAdapter" Name="grid" UserDataComponentName="gridTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="sample_task_dbConnectionString1 (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT b.title, a.AuthorName
+FROM books as b
+INNER JOIN books_authors as c
+    ON b.book_id = c.book_id
+INNER JOIN authors as a
+    ON c.author_id= a.author_id
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="title" DataSetColumn="title" />
+              <Mapping SourceColumn="AuthorName" DataSetColumn="AuthorName" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -253,7 +276,7 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
   <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="books" msprop:Generator_TableClassName="booksDataTable" msprop:Generator_TableVarName="tablebooks" msprop:Generator_TablePropName="books" msprop:Generator_RowDeletingName="booksRowDeleting" msprop:Generator_RowChangingName="booksRowChanging" msprop:Generator_RowEvHandlerName="booksRowChangeEventHandler" msprop:Generator_RowDeletedName="booksRowDeleted" msprop:Generator_UserTableName="books" msprop:Generator_RowChangedName="booksRowChanged" msprop:Generator_RowEvArgName="booksRowChangeEvent" msprop:Generator_RowClassName="booksRow">
+        <xs:element name="books" msprop:Generator_TableClassName="booksDataTable" msprop:Generator_TableVarName="tablebooks" msprop:Generator_RowChangedName="booksRowChanged" msprop:Generator_TablePropName="books" msprop:Generator_RowDeletingName="booksRowDeleting" msprop:Generator_RowChangingName="booksRowChanging" msprop:Generator_RowEvHandlerName="booksRowChangeEventHandler" msprop:Generator_RowDeletedName="booksRowDeleted" msprop:Generator_RowClassName="booksRow" msprop:Generator_UserTableName="books" msprop:Generator_RowEvArgName="booksRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="book_id" msprop:Generator_ColumnVarNameInTable="columnbook_id" msprop:Generator_ColumnPropNameInRow="book_id" msprop:Generator_ColumnPropNameInTable="book_idColumn" msprop:Generator_UserColumnName="book_id" type="xs:int" />
@@ -268,7 +291,7 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="authors" msprop:Generator_TableClassName="authorsDataTable" msprop:Generator_TableVarName="tableauthors" msprop:Generator_TablePropName="authors" msprop:Generator_RowDeletingName="authorsRowDeleting" msprop:Generator_RowChangingName="authorsRowChanging" msprop:Generator_RowEvHandlerName="authorsRowChangeEventHandler" msprop:Generator_RowDeletedName="authorsRowDeleted" msprop:Generator_UserTableName="authors" msprop:Generator_RowChangedName="authorsRowChanged" msprop:Generator_RowEvArgName="authorsRowChangeEvent" msprop:Generator_RowClassName="authorsRow">
+        <xs:element name="authors" msprop:Generator_TableClassName="authorsDataTable" msprop:Generator_TableVarName="tableauthors" msprop:Generator_RowChangedName="authorsRowChanged" msprop:Generator_TablePropName="authors" msprop:Generator_RowDeletingName="authorsRowDeleting" msprop:Generator_RowChangingName="authorsRowChanging" msprop:Generator_RowEvHandlerName="authorsRowChangeEventHandler" msprop:Generator_RowDeletedName="authorsRowDeleted" msprop:Generator_RowClassName="authorsRow" msprop:Generator_UserTableName="authors" msprop:Generator_RowEvArgName="authorsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="author_id" msprop:Generator_ColumnVarNameInTable="columnauthor_id" msprop:Generator_ColumnPropNameInRow="author_id" msprop:Generator_ColumnPropNameInTable="author_idColumn" msprop:Generator_UserColumnName="author_id" type="xs:int" />
@@ -282,7 +305,7 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="books_authors" msprop:Generator_TableClassName="books_authorsDataTable" msprop:Generator_TableVarName="tablebooks_authors" msprop:Generator_TablePropName="books_authors" msprop:Generator_RowDeletingName="books_authorsRowDeleting" msprop:Generator_RowChangingName="books_authorsRowChanging" msprop:Generator_RowEvHandlerName="books_authorsRowChangeEventHandler" msprop:Generator_RowDeletedName="books_authorsRowDeleted" msprop:Generator_UserTableName="books_authors" msprop:Generator_RowChangedName="books_authorsRowChanged" msprop:Generator_RowEvArgName="books_authorsRowChangeEvent" msprop:Generator_RowClassName="books_authorsRow">
+        <xs:element name="books_authors" msprop:Generator_TableClassName="books_authorsDataTable" msprop:Generator_TableVarName="tablebooks_authors" msprop:Generator_RowChangedName="books_authorsRowChanged" msprop:Generator_TablePropName="books_authors" msprop:Generator_RowDeletingName="books_authorsRowDeleting" msprop:Generator_RowChangingName="books_authorsRowChanging" msprop:Generator_RowEvHandlerName="books_authorsRowChangeEventHandler" msprop:Generator_RowDeletedName="books_authorsRowDeleted" msprop:Generator_RowClassName="books_authorsRow" msprop:Generator_UserTableName="books_authors" msprop:Generator_RowEvArgName="books_authorsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="book_id" msprop:Generator_ColumnVarNameInTable="columnbook_id" msprop:Generator_ColumnPropNameInRow="book_id" msprop:Generator_ColumnPropNameInTable="book_idColumn" msprop:Generator_UserColumnName="book_id" type="xs:int" />
@@ -290,7 +313,7 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="users" msprop:Generator_TableClassName="usersDataTable" msprop:Generator_TableVarName="tableusers" msprop:Generator_TablePropName="users" msprop:Generator_RowDeletingName="usersRowDeleting" msprop:Generator_RowChangingName="usersRowChanging" msprop:Generator_RowEvHandlerName="usersRowChangeEventHandler" msprop:Generator_RowDeletedName="usersRowDeleted" msprop:Generator_UserTableName="users" msprop:Generator_RowChangedName="usersRowChanged" msprop:Generator_RowEvArgName="usersRowChangeEvent" msprop:Generator_RowClassName="usersRow">
+        <xs:element name="users" msprop:Generator_TableClassName="usersDataTable" msprop:Generator_TableVarName="tableusers" msprop:Generator_RowChangedName="usersRowChanged" msprop:Generator_TablePropName="users" msprop:Generator_RowDeletingName="usersRowDeleting" msprop:Generator_RowChangingName="usersRowChanging" msprop:Generator_RowEvHandlerName="usersRowChangeEventHandler" msprop:Generator_RowDeletedName="usersRowDeleted" msprop:Generator_RowClassName="usersRow" msprop:Generator_UserTableName="users" msprop:Generator_RowEvArgName="usersRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="user_id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnuser_id" msprop:Generator_ColumnPropNameInRow="user_id" msprop:Generator_ColumnPropNameInTable="user_idColumn" msprop:Generator_UserColumnName="user_id" type="xs:int" />
@@ -311,7 +334,7 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="books_history" msprop:Generator_TableClassName="books_historyDataTable" msprop:Generator_TableVarName="tablebooks_history" msprop:Generator_TablePropName="books_history" msprop:Generator_RowDeletingName="books_historyRowDeleting" msprop:Generator_RowChangingName="books_historyRowChanging" msprop:Generator_RowEvHandlerName="books_historyRowChangeEventHandler" msprop:Generator_RowDeletedName="books_historyRowDeleted" msprop:Generator_UserTableName="books_history" msprop:Generator_RowChangedName="books_historyRowChanged" msprop:Generator_RowEvArgName="books_historyRowChangeEvent" msprop:Generator_RowClassName="books_historyRow">
+        <xs:element name="books_history" msprop:Generator_TableClassName="books_historyDataTable" msprop:Generator_TableVarName="tablebooks_history" msprop:Generator_RowChangedName="books_historyRowChanged" msprop:Generator_TablePropName="books_history" msprop:Generator_RowDeletingName="books_historyRowDeleting" msprop:Generator_RowChangingName="books_historyRowChanging" msprop:Generator_RowEvHandlerName="books_historyRowChangeEventHandler" msprop:Generator_RowDeletedName="books_historyRowDeleted" msprop:Generator_RowClassName="books_historyRow" msprop:Generator_UserTableName="books_history" msprop:Generator_RowEvArgName="books_historyRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="book_id" msprop:Generator_ColumnVarNameInTable="columnbook_id" msprop:Generator_ColumnPropNameInRow="book_id" msprop:Generator_ColumnPropNameInTable="book_idColumn" msprop:Generator_UserColumnName="book_id" type="xs:int" />
@@ -325,6 +348,26 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
               </xs:element>
               <xs:element name="date_from" msprop:Generator_ColumnVarNameInTable="columndate_from" msprop:Generator_ColumnPropNameInRow="date_from" msprop:Generator_ColumnPropNameInTable="date_fromColumn" msprop:Generator_UserColumnName="date_from" type="xs:dateTime" />
               <xs:element name="date_to" msprop:Generator_ColumnVarNameInTable="columndate_to" msprop:Generator_ColumnPropNameInRow="date_to" msprop:Generator_ColumnPropNameInTable="date_toColumn" msprop:Generator_UserColumnName="date_to" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="grid" msprop:Generator_TableClassName="gridDataTable" msprop:Generator_TableVarName="tablegrid" msprop:Generator_TablePropName="grid" msprop:Generator_RowDeletingName="gridRowDeleting" msprop:Generator_RowChangingName="gridRowChanging" msprop:Generator_RowEvHandlerName="gridRowChangeEventHandler" msprop:Generator_RowDeletedName="gridRowDeleted" msprop:Generator_UserTableName="grid" msprop:Generator_RowChangedName="gridRowChanged" msprop:Generator_RowEvArgName="gridRowChangeEvent" msprop:Generator_RowClassName="gridRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="title" msprop:Generator_ColumnVarNameInTable="columntitle" msprop:Generator_ColumnPropNameInRow="title" msprop:Generator_ColumnPropNameInTable="titleColumn" msprop:Generator_UserColumnName="title">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AuthorName" msprop:Generator_ColumnVarNameInTable="columnAuthorName" msprop:Generator_ColumnPropNameInRow="AuthorName" msprop:Generator_ColumnPropNameInTable="AuthorNameColumn" msprop:Generator_UserColumnName="AuthorName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -354,8 +397,8 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="FK_books_authors_authors" msdata:parent="authors" msdata:child="books_authors" msdata:parentkey="author_id" msdata:childkey="book_id" msprop:Generator_UserChildTable="books_authors" msprop:Generator_ChildPropName="Getbooks_authorsRows" msprop:Generator_UserRelationName="FK_books_authors_authors" msprop:Generator_ParentPropName="authorsRow" msprop:Generator_RelationVarName="relationFK_books_authors_authors" msprop:Generator_UserParentTable="authors" />
-      <msdata:Relationship name="FK_books_authors_books" msdata:parent="books" msdata:child="books_authors" msdata:parentkey="book_id" msdata:childkey="book_id" msprop:Generator_UserChildTable="books_authors" msprop:Generator_ChildPropName="Getbooks_authorsRows" msprop:Generator_UserRelationName="FK_books_authors_books" msprop:Generator_ParentPropName="booksRow" msprop:Generator_RelationVarName="relationFK_books_authors_books" msprop:Generator_UserParentTable="books" />
+      <msdata:Relationship name="FK_books_authors_authors" msdata:parent="authors" msdata:child="books_authors" msdata:parentkey="author_id" msdata:childkey="book_id" msprop:Generator_UserChildTable="books_authors" msprop:Generator_ChildPropName="Getbooks_authorsRows" msprop:Generator_UserRelationName="FK_books_authors_authors" msprop:Generator_RelationVarName="relationFK_books_authors_authors" msprop:Generator_UserParentTable="authors" msprop:Generator_ParentPropName="authorsRow" />
+      <msdata:Relationship name="FK_books_authors_books" msdata:parent="books" msdata:child="books_authors" msdata:parentkey="book_id" msdata:childkey="book_id" msprop:Generator_UserChildTable="books_authors" msprop:Generator_ChildPropName="Getbooks_authorsRows" msprop:Generator_UserRelationName="FK_books_authors_books" msprop:Generator_RelationVarName="relationFK_books_authors_books" msprop:Generator_UserParentTable="books" msprop:Generator_ParentPropName="booksRow" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>
