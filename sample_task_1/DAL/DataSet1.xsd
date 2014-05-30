@@ -271,7 +271,7 @@ INNER JOIN authors as a
               <DbSource ConnectionRef="sample_task_dbConnectionString1 (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByUsername" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByUsername" GeneratorSourceName="FillByUsername" GetMethodModifier="Public" GetMethodName="GetDataByUsername" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByUsername" UserSourceName="FillByUsername">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT b.title, a.AuthorName, b.BooksLeft, d.taken_by
+                    <CommandText>SELECT d.entry_id, b.title, a.AuthorName, b.BooksLeft, d.taken_by, d.date_from
 FROM books_history as d
 INNER JOIN books as b
    ON d.book_id = b.book_id

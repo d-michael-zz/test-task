@@ -58,10 +58,18 @@ namespace sample_task_1
             GridBAL booksLogic = new GridBAL();
             //DataView myDataView = new DataView(booksLogic.GetData());
             DataView myDataView = new DataView();
-            if(Convert.ToByte(ViewState["filter"]) == 1)
-                myDataView = booksLogic.GetData(Convert.ToByte(ViewState["filter"])).AsDataView();
+
+            if (ViewState["username"].ToString() == "")
+            {
+                if (Convert.ToByte(ViewState["filter"]) == 1)
+                    myDataView = booksLogic.GetData(Convert.ToByte(ViewState["filter"])).AsDataView();
+                else
+                    myDataView = booksLogic.GetData().AsDataView();
+            }
             else
-                myDataView = booksLogic.GetData().AsDataView();
+                myDataView = booksLogic.GetDataByUsername(ViewState["username"].ToString()).AsDataView();
+
+
             myDataView.Sort = sortExpression + direction;
             BooksGrid.DataSource = myDataView;
             BooksGrid.DataBind();
@@ -83,6 +91,7 @@ namespace sample_task_1
         protected void AllBooks_Click(object sender, EventArgs e)
         {
             ViewState["filter"] = 0;
+            ViewState["username"] = "";
             GridBAL booksLogic = new GridBAL();
             BooksGrid.DataSource = booksLogic.GetData(Convert.ToByte(ViewState["filter"]));
             BooksGrid.DataBind();
@@ -91,6 +100,7 @@ namespace sample_task_1
         protected void AvailableBooks_Click(object sender, EventArgs e)
         {
             ViewState["filter"] = 1;
+            ViewState["username"] = "";
             GridBAL booksLogic = new GridBAL();
             BooksGrid.DataSource = booksLogic.GetData(Convert.ToByte(ViewState["filter"]));
             BooksGrid.DataBind();
@@ -99,9 +109,9 @@ namespace sample_task_1
         protected void TakenBooks_Click(object sender, EventArgs e)
         {
             ViewState["filter"] = 0;
-            string username = "test1@test.com";
+            ViewState["username"] = "test1@test.com";
             GridBAL booksLogic = new GridBAL();
-            BooksGrid.DataSource = booksLogic.GetDataByUsername(username);
+            BooksGrid.DataSource = booksLogic.GetDataByUsername(ViewState["username"].ToString());
             BooksGrid.DataBind();
         }
     }

@@ -4366,10 +4366,14 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT b.title, a.AuthorName, b.BooksLeft, d.taken_by\r\nFROM books_history as d\r\nI" +
-                "NNER JOIN books as b\r\n   ON d.book_id = b.book_id\r\nINNER JOIN books_authors as c" +
-                "\r\n    ON b.book_id = c.book_id\r\nINNER JOIN authors as a\r\n    ON c.author_id= a.a" +
-                "uthor_id";
+            this._commandCollection[1].CommandText = @"SELECT d.entry_id, b.title, a.AuthorName, b.BooksLeft, d.taken_by, d.date_from
+FROM books_history as d
+INNER JOIN books as b
+   ON d.book_id = b.book_id
+INNER JOIN books_authors as c
+    ON b.book_id = c.book_id
+INNER JOIN authors as a
+    ON c.author_id= a.author_id";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
         }
         

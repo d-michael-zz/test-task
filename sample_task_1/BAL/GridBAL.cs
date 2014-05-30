@@ -58,7 +58,8 @@ namespace BAL
             DAL.DataSet1.gridDataTable grid = Adapter.GetDataByUsername();
             for (int i = 1; i < grid.Rows.Count; i++)
             {
-                if (grid.Rows[i]["title"].ToString() == grid.Rows[i - 1]["title"].ToString())
+                //if (grid.Rows[i]["title"].ToString() == grid.Rows[i - 1]["title"].ToString())
+                if (grid.Rows[i]["entry_id"].ToString() == grid.Rows[i - 1]["entry_id"].ToString())
                 {
                     grid.Rows[i]["AuthorName"] = grid.Rows[i - 1]["AuthorName"] + ", " + grid.Rows[i]["AuthorName"];
                     grid.Rows[i - 1].Delete();
@@ -73,6 +74,9 @@ namespace BAL
                     grid.Rows[i].Delete();
                 }      
             }
+
+            grid.Columns.Remove("entry_id");
+            grid.Columns.Remove("BooksLeft");
 
             return grid;
         }
