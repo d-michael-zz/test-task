@@ -2,6 +2,10 @@
     
     
     public partial class DataSet1 {
+        partial class gridDataTable
+        {
+        }
+    
         partial class booksDataTable
         {
         }
@@ -13,6 +17,10 @@
 }
 
 namespace DAL.DataSet1TableAdapters {
+    partial class gridTableAdapter
+    {
+    }
+
     partial class usersTableAdapter
     {
     }

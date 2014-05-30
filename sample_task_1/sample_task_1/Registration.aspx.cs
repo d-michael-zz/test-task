@@ -17,15 +17,15 @@ namespace sample_task_1
 
         protected void BtnSave_Click(object sender, EventArgs e)
         {
-            string email = txtMail.Text;
-            string pass = txtPass.Text;
+            string email = Mail.Text;
+            string pass = Pass.Text;
 
             bool result = false; 
             UsersBAL usersLogic = new UsersBAL();
             result = usersLogic.AddUser(email, pass);
 
             if (result == true)
-                Label1.Text = "User added";
+                SaveLabel.Text = "User added";
         }
     }
 }

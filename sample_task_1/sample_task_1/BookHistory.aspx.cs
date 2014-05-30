@@ -13,8 +13,8 @@ namespace sample_task_1
         protected void Page_Load(object sender, EventArgs e)
         {
             HistoryBAL booksLogic = new HistoryBAL();
-            GridView1.DataSource = booksLogic.GetData();
-            GridView1.DataBind();
+            BooksHistory.DataSource = booksLogic.GetData();
+            BooksHistory.DataBind();
         }
     }
 }

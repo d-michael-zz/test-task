@@ -7,12 +7,17 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">    
-    <div>
-        <asp:GridView ID="GridView1" runat="server" AllowSorting="True" allowpaging="true" autogeneratecolumns="true"
-            onsorting="GridView1_Sorting"  OnRowDataBound="GridView1_RowDataBound">
-        </asp:GridView>
-    </div>
+    <form id="form1" runat="server">
+        <div>
+            <asp:Button ID="AllBooks" runat="server" Text="All books" OnClick="AllBooks_Click" />
+            <asp:Button ID="AvailableBooks" runat="server" Text="Available books" OnClick="AvailableBooks_Click" />
+            <asp:Button ID="TakenBooks" runat="server" Text="Taken by you" OnClick="TakenBooks_Click" />
+        </div>
+        <div>
+            <asp:GridView ID="BooksGrid" runat="server" AllowSorting="True" allowpaging="true" autogeneratecolumns="true"
+                onsorting="GridView1_Sorting"  OnRowDataBound="GridView1_RowDataBound">
+            </asp:GridView>
+        </div>
     </form>
 </body>
 </html>

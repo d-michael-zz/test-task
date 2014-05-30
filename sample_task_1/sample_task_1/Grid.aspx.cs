@@ -14,12 +14,13 @@ namespace sample_task_1
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
+        protected byte filter = 0; 
         protected void Page_Load(object sender, EventArgs e)
         {
             //BooksBAL booksLogic = new BooksBAL();
             GridBAL booksLogic = new GridBAL();
-            GridView1.DataSource = booksLogic.GetData();
-            GridView1.DataBind();
+            BooksGrid.DataSource = booksLogic.GetData();
+            BooksGrid.DataBind();
         }
 
         public SortDirection GridViewSortDirection
@@ -51,14 +52,19 @@ namespace sample_task_1
 
         }
 
+        //EnableSortingAndPagingCallbacks to minimize postbacks?
         private void SortGridView(string sortExpression, string direction)
         {
-            //BooksBAL booksLogic = new BooksBAL();
             GridBAL booksLogic = new GridBAL();
-            DataView myDataView = new DataView(booksLogic.GetData());
+            //DataView myDataView = new DataView(booksLogic.GetData());
+            DataView myDataView = new DataView();
+            if(Convert.ToByte(ViewState["filter"]) == 1)
+                myDataView = booksLogic.GetData(Convert.ToByte(ViewState["filter"])).AsDataView();
+            else
+                myDataView = booksLogic.GetData().AsDataView();
             myDataView.Sort = sortExpression + direction;
-            GridView1.DataSource = myDataView;
-            GridView1.DataBind();
+            BooksGrid.DataSource = myDataView;
+            BooksGrid.DataBind();
         }
 
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -72,6 +78,31 @@ namespace sample_task_1
                 LinkButton LnkHeaderText3 = e.Row.Cells[2].Controls[0] as LinkButton;
                 LnkHeaderText3.Text = "Temp_name";
             }*/
+        }
+
+        protected void AllBooks_Click(object sender, EventArgs e)
+        {
+            ViewState["filter"] = 0;
+            GridBAL booksLogic = new GridBAL();
+            BooksGrid.DataSource = booksLogic.GetData(Convert.ToByte(ViewState["filter"]));
+            BooksGrid.DataBind();
+        }
+
+        protected void AvailableBooks_Click(object sender, EventArgs e)
+        {
+            ViewState["filter"] = 1;
+            GridBAL booksLogic = new GridBAL();
+            BooksGrid.DataSource = booksLogic.GetData(Convert.ToByte(ViewState["filter"]));
+            BooksGrid.DataBind();
+        }
+
+        protected void TakenBooks_Click(object sender, EventArgs e)
+        {
+            ViewState["filter"] = 0;
+            string username = "test1@test.com";
+            GridBAL booksLogic = new GridBAL();
+            BooksGrid.DataSource = booksLogic.GetDataByUsername(username);
+            BooksGrid.DataBind();
         }
     }
 

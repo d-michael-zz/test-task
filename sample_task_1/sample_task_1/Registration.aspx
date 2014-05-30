@@ -15,13 +15,13 @@
                 <tr>
                     <td> Email </td>
                     <td>
-                        <asp:TextBox ID="txtMail" Width="150px" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="Mail" Width="150px" runat="server"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td> Password </td>
                     <td>
-                        <asp:TextBox ID="txtPass" Width="150px" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="Pass" Width="150px" runat="server"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
@@ -31,7 +31,7 @@
                 </tr>
                 <tr>
                     <th colspan="2">
-                        <asp:Label ID="Label1" runat="server" Text="Label"> Press Save</asp:Label>
+                        <asp:Label ID="SaveLabel" runat="server" Text="Label"> Press Save</asp:Label>
                     </th>
                 </tr> 
             </table>

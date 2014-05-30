@@ -1924,6 +1924,8 @@ namespace DAL {
             
             private global::System.Data.DataColumn columnAuthorName;
             
+            private global::System.Data.DataColumn columnBooksLeft;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public gridDataTable() {
@@ -1975,6 +1977,14 @@ namespace DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn BooksLeftColumn {
+                get {
+                    return this.columnBooksLeft;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2010,11 +2020,12 @@ namespace DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public gridRow AddgridRow(string title, string AuthorName) {
+            public gridRow AddgridRow(string title, string AuthorName, byte BooksLeft) {
                 gridRow rowgridRow = ((gridRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         title,
-                        AuthorName};
+                        AuthorName,
+                        BooksLeft};
                 rowgridRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowgridRow);
                 return rowgridRow;
@@ -2039,6 +2050,7 @@ namespace DAL {
             internal void InitVars() {
                 this.columntitle = base.Columns["title"];
                 this.columnAuthorName = base.Columns["AuthorName"];
+                this.columnBooksLeft = base.Columns["BooksLeft"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2048,10 +2060,13 @@ namespace DAL {
                 base.Columns.Add(this.columntitle);
                 this.columnAuthorName = new global::System.Data.DataColumn("AuthorName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAuthorName);
+                this.columnBooksLeft = new global::System.Data.DataColumn("BooksLeft", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBooksLeft);
                 this.columntitle.AllowDBNull = false;
                 this.columntitle.MaxLength = 100;
                 this.columnAuthorName.AllowDBNull = false;
                 this.columnAuthorName.MaxLength = 50;
+                this.columnBooksLeft.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2495,6 +2510,17 @@ namespace DAL {
                 }
                 set {
                     this[this.tablegrid.AuthorNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public byte BooksLeft {
+                get {
+                    return ((byte)(this[this.tablegrid.BooksLeftColumn]));
+                }
+                set {
+                    this[this.tablegrid.BooksLeftColumn] = value;
                 }
             }
         }
@@ -4317,6 +4343,7 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
             tableMapping.DataSetTable = "grid";
             tableMapping.ColumnMappings.Add("title", "title");
             tableMapping.ColumnMappings.Add("AuthorName", "AuthorName");
+            tableMapping.ColumnMappings.Add("BooksLeft", "BooksLeft");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -4330,13 +4357,20 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT b.title, a.AuthorName\r\nFROM books as b\r\nINNER JOIN books_authors as c\r\n   " +
-                " ON b.book_id = c.book_id\r\nINNER JOIN authors as a\r\n    ON c.author_id= a.author" +
-                "_id\r\n";
+            this._commandCollection[0].CommandText = "SELECT b.title,  a.AuthorName, b.BooksLeft\r\nFROM books as b\r\nINNER JOIN books_aut" +
+                "hors as c\r\n    ON b.book_id = c.book_id\r\nINNER JOIN authors as a\r\n    ON c.autho" +
+                "r_id= a.author_id\r\n";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT b.title, a.AuthorName, b.BooksLeft, d.taken_by\r\nFROM books_history as d\r\nI" +
+                "NNER JOIN books as b\r\n   ON d.book_id = b.book_id\r\nINNER JOIN books_authors as c" +
+                "\r\n    ON b.book_id = c.book_id\r\nINNER JOIN authors as a\r\n    ON c.author_id= a.a" +
+                "uthor_id";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4358,6 +4392,30 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual DataSet1.gridDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            DataSet1.gridDataTable dataTable = new DataSet1.gridDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByUsername(DataSet1.gridDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual DataSet1.gridDataTable GetDataByUsername() {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
             DataSet1.gridDataTable dataTable = new DataSet1.gridDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
