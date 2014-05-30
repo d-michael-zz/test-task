@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data();
 using DAL.DataSet1TableAdapters;
 
 namespace BAL
@@ -44,9 +45,33 @@ namespace BAL
             users.AddusersRow(user);
             int rowsAffected = Adapter.Update(users);
 
-            // Return true if precisely one row was inserted,
-            // otherwise false
+            // Return true if  one row was inserted
             return rowsAffected == 1;
         }
+
+        public List<> GetUsersList()
+        {
+            List<string> users = new List<string>; 
+            DAL.DataSet1.usersDataTable grid = Adapter.GetData();
+
+            foreach (DataRow row in grid.Rows)
+            {
+                users.Add((string)row[0]);
+            }
+            return users;
+        }
+
+        public List<> GetPassList()
+        {
+            List<string> pass = new List<string>; 
+            DAL.DataSet1.usersDataTable grid = Adapter.GetData();
+
+            foreach (DataRow row in grid.Rows)
+            {
+                pass.Add((string)row[0]);
+            }
+            return pass;
+        }
+
     }
 }

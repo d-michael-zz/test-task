@@ -111,7 +111,9 @@ namespace sample_task_1
         protected void TakenBooks_Click(object sender, EventArgs e)
         {
             ViewState["filter"] = 0;
-            ViewState["username"] = "test1@test.com";
+            ViewState["username"] = (string)(Session["email"]);
+            //ViewState["username"] = "test1@test.com";
+
             GridBAL booksLogic = new GridBAL();
             BooksGrid.DataSource = booksLogic.GetDataByUsername(ViewState["username"].ToString());
             BooksGrid.DataBind();
