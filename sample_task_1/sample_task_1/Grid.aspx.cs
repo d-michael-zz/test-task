@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 //temp
 using System.Data;
+using System.Net;
+using System.Net.Mail;
 
 using DAL.DataSet1TableAdapters;
 using BAL;
@@ -113,6 +115,57 @@ namespace sample_task_1
             GridBAL booksLogic = new GridBAL();
             BooksGrid.DataSource = booksLogic.GetDataByUsername(ViewState["username"].ToString());
             BooksGrid.DataBind();
+        }
+
+        protected void SendMail_Click(object sender, EventArgs e)
+        {
+            RemindersBAL remindersLogic = new RemindersBAL();
+
+            List<string> users = new List<string>();
+            users = remindersLogic.GetMails();
+
+            List<string> titles = new List<string>();
+            titles = remindersLogic.GetTitles();
+
+            List<string> dates = new List<string>();
+            dates = remindersLogic.GetDates();
+
+
+            //Sending mails
+            var fromAddress = new MailAddress("testtasksimplemail@mail.ru", "Ivan Petrov");
+
+            //Wrong password
+            const string fromPassword = "12345";
+            const string subject = "Books from our library";
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.mail.ru",
+                Port = 2525,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+            };
+
+            for(int i = 0; i < users.Count; i++)
+            {
+                var toAddress = new MailAddress(users[i], "To library user");
+                string tempBody = "Books taken: " + titles[i] + ", " + dates[i];
+                string body = tempBody;
+
+                using (var message = new MailMessage(fromAddress, toAddress)
+                {
+                    Subject = subject,
+                    Body = body
+                })
+                {
+                    smtp.Send(message);
+                }
+
+
+            }
+
         }
     }
 

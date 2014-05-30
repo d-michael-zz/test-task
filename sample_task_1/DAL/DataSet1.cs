@@ -17,6 +17,10 @@
 }
 
 namespace DAL.DataSet1TableAdapters {
+    partial class remindersTableAdapter
+    {
+    }
+
     partial class gridTableAdapter
     {
     }

@@ -49,6 +49,15 @@ namespace sample_task_1 {
         protected global::System.Web.UI.WebControls.Button TakenBooks;
         
         /// <summary>
+        /// SendMail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SendMail;
+        
+        /// <summary>
         /// BooksGrid control.
         /// </summary>
         /// <remarks>
@@ -56,5 +65,14 @@ namespace sample_task_1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView BooksGrid;
+        
+        /// <summary>
+        /// TestLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TestLabel;
     }
 }

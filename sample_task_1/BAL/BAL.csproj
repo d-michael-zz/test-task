@@ -43,6 +43,7 @@
     <Compile Include="GridBAL.cs" />
     <Compile Include="HistoryBAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RemindersBAL.cs" />
     <Compile Include="UsersBAL.cs" />
   </ItemGroup>
   <ItemGroup>

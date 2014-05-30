@@ -4,7 +4,7 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="sample_task_dbConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="sample_task_dbConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.DAL.Properties.Settings.GlobalReference.Default.sample_task_dbConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="sample_task_dbConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="sample_task_dbConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.DAL.Properties.Settings.GlobalReference.Default.sample_task_dbConnectionString" Provider="System.Data.SqlClient" />
           <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="sample_task_dbConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="sample_task_dbConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.DAL.Properties.Settings.GlobalReference.Default.sample_task_dbConnectionString1" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
@@ -285,6 +285,28 @@ INNER JOIN authors as a
               </DbSource>
             </Sources>
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="remindersTableAdapter" GeneratorDataComponentClassName="remindersTableAdapter" Name="reminders" UserDataComponentName="remindersTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="sample_task_dbConnectionString1 (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT a.taken_by, b.Title, a.date_from
+FROM books_history as a
+INNER JOIN books as b
+    ON a.book_id = b.book_id
+WHERE a.date_to IS null</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="taken_by" DataSetColumn="taken_by" />
+              <Mapping SourceColumn="Title" DataSetColumn="Title" />
+              <Mapping SourceColumn="date_from" DataSetColumn="date_from" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -386,6 +408,27 @@ INNER JOIN authors as a
                 </xs:simpleType>
               </xs:element>
               <xs:element name="BooksLeft" msprop:Generator_ColumnVarNameInTable="columnBooksLeft" msprop:Generator_ColumnPropNameInRow="BooksLeft" msprop:Generator_ColumnPropNameInTable="BooksLeftColumn" msprop:Generator_UserColumnName="BooksLeft" type="xs:unsignedByte" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="reminders" msprop:Generator_TableClassName="remindersDataTable" msprop:Generator_TableVarName="tablereminders" msprop:Generator_TablePropName="reminders" msprop:Generator_RowDeletingName="remindersRowDeleting" msprop:Generator_RowChangingName="remindersRowChanging" msprop:Generator_RowEvHandlerName="remindersRowChangeEventHandler" msprop:Generator_RowDeletedName="remindersRowDeleted" msprop:Generator_UserTableName="reminders" msprop:Generator_RowChangedName="remindersRowChanged" msprop:Generator_RowEvArgName="remindersRowChangeEvent" msprop:Generator_RowClassName="remindersRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="taken_by" msprop:Generator_ColumnVarNameInTable="columntaken_by" msprop:Generator_ColumnPropNameInRow="taken_by" msprop:Generator_ColumnPropNameInTable="taken_byColumn" msprop:Generator_UserColumnName="taken_by">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Title" msprop:Generator_ColumnVarNameInTable="columnTitle" msprop:Generator_ColumnPropNameInRow="Title" msprop:Generator_ColumnPropNameInTable="TitleColumn" msprop:Generator_UserColumnName="Title">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="date_from" msprop:Generator_ColumnVarNameInTable="columndate_from" msprop:Generator_ColumnPropNameInRow="date_from" msprop:Generator_ColumnPropNameInTable="date_fromColumn" msprop:Generator_UserColumnName="date_from" type="xs:dateTime" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
