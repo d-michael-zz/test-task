@@ -37,7 +37,7 @@ namespace BAL
 
             foreach (DataRow row in grid.Rows)
             {
-                users.Add((string)row[0]);
+                users.Add(row[0].ToString());
             }
 
             return users;
@@ -50,7 +50,7 @@ namespace BAL
 
             foreach (DataRow row in grid.Rows)
             {
-                titles.Add((string)row[1]);
+                titles.Add(row[1].ToString());
             }
 
             return titles;

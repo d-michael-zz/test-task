@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data();
+using System.Data;
 using DAL.DataSet1TableAdapters;
 
 namespace BAL
@@ -49,26 +49,26 @@ namespace BAL
             return rowsAffected == 1;
         }
 
-        public List<> GetUsersList()
+        public List<string> GetUsersList()
         {
-            List<string> users = new List<string>; 
+            List<string> users = new List<string>(); 
             DAL.DataSet1.usersDataTable grid = Adapter.GetData();
 
             foreach (DataRow row in grid.Rows)
             {
-                users.Add((string)row[0]);
+                users.Add(row[1].ToString());
             }
             return users;
         }
 
-        public List<> GetPassList()
+        public List<string> GetPassList()
         {
-            List<string> pass = new List<string>; 
+            List<string> pass = new List<string>(); 
             DAL.DataSet1.usersDataTable grid = Adapter.GetData();
 
             foreach (DataRow row in grid.Rows)
             {
-                pass.Add((string)row[0]);
+                pass.Add(row[2].ToString());
             }
             return pass;
         }

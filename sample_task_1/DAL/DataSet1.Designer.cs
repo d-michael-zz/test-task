@@ -1644,7 +1644,7 @@ namespace DAL {
             
             private global::System.Data.DataColumn columndate_from;
             
-            private global::System.Data.DataColumn columndate_to;
+            private global::System.Data.DataColumn columnis_returned;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -1713,9 +1713,9 @@ namespace DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn date_toColumn {
+            public global::System.Data.DataColumn is_returnedColumn {
                 get {
-                    return this.columndate_to;
+                    return this.columnis_returned;
                 }
             }
             
@@ -1756,14 +1756,14 @@ namespace DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public books_historyRow Addbooks_historyRow(int book_id, int entry_id, string taken_by, System.DateTime date_from, System.DateTime date_to) {
+            public books_historyRow Addbooks_historyRow(int book_id, int entry_id, string taken_by, System.DateTime date_from, byte is_returned) {
                 books_historyRow rowbooks_historyRow = ((books_historyRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         book_id,
                         entry_id,
                         taken_by,
                         date_from,
-                        date_to};
+                        is_returned};
                 rowbooks_historyRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowbooks_historyRow);
                 return rowbooks_historyRow;
@@ -1797,7 +1797,7 @@ namespace DAL {
                 this.columnentry_id = base.Columns["entry_id"];
                 this.columntaken_by = base.Columns["taken_by"];
                 this.columndate_from = base.Columns["date_from"];
-                this.columndate_to = base.Columns["date_to"];
+                this.columnis_returned = base.Columns["is_returned"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1811,8 +1811,8 @@ namespace DAL {
                 base.Columns.Add(this.columntaken_by);
                 this.columndate_from = new global::System.Data.DataColumn("date_from", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndate_from);
-                this.columndate_to = new global::System.Data.DataColumn("date_to", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndate_to);
+                this.columnis_returned = new global::System.Data.DataColumn("is_returned", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnis_returned);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnentry_id}, true));
                 this.columnbook_id.AllowDBNull = false;
@@ -1821,7 +1821,6 @@ namespace DAL {
                 this.columntaken_by.AllowDBNull = false;
                 this.columntaken_by.MaxLength = 50;
                 this.columndate_from.AllowDBNull = false;
-                this.columndate_to.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2782,13 +2781,30 @@ namespace DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime date_to {
+            public byte is_returned {
                 get {
-                    return ((global::System.DateTime)(this[this.tablebooks_history.date_toColumn]));
+                    try {
+                        return ((byte)(this[this.tablebooks_history.is_returnedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'is_returned\' in table \'books_history\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this[this.tablebooks_history.date_toColumn] = value;
+                    this[this.tablebooks_history.is_returnedColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isis_returnedNull() {
+                return this.IsNull(this.tablebooks_history.is_returnedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setis_returnedNull() {
+                this[this.tablebooks_history.is_returnedColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -4393,46 +4409,44 @@ SELECT user_id, email, password FROM users WHERE (user_id = @user_id)";
             tableMapping.ColumnMappings.Add("entry_id", "entry_id");
             tableMapping.ColumnMappings.Add("taken_by", "taken_by");
             tableMapping.ColumnMappings.Add("date_from", "date_from");
-            tableMapping.ColumnMappings.Add("date_to", "date_to");
+            tableMapping.ColumnMappings.Add("is_returned", "is_returned");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [books_history] WHERE (([book_id] = @Original_book_id) AND ([entry_id" +
-                "] = @Original_entry_id) AND ([taken_by] = @Original_taken_by) AND ([date_from] =" +
-                " @Original_date_from) AND ([date_to] = @Original_date_to))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [books_history] WHERE (([book_id] = @Original_book_id) AND ([entry_id] = @Original_entry_id) AND ([taken_by] = @Original_taken_by) AND ([date_from] = @Original_date_from) AND ((@IsNull_is_returned = 1 AND [is_returned] IS NULL) OR ([is_returned] = @Original_is_returned)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_book_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "book_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_entry_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entry_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_taken_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "taken_by", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date_from", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_from", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date_to", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_to", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_is_returned", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "is_returned", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_is_returned", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "is_returned", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [books_history] ([book_id], [entry_id], [taken_by], [date_from], [dat" +
-                "e_to]) VALUES (@book_id, @entry_id, @taken_by, @date_from, @date_to);\r\nSELECT bo" +
-                "ok_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE (entry_id" +
-                " = @entry_id)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [books_history] ([book_id], [entry_id], [taken_by], [date_from], [is_returned]) VALUES (@book_id, @entry_id, @taken_by, @date_from, @is_returned);
+SELECT book_id, entry_id, taken_by, date_from, is_returned FROM books_history WHERE (entry_id = @entry_id)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@book_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "book_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@entry_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entry_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@taken_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "taken_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_from", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_from", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_to", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_to", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@is_returned", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "is_returned", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [books_history] SET [book_id] = @book_id, [entry_id] = @entry_id, [taken_by] = @taken_by, [date_from] = @date_from, [date_to] = @date_to WHERE (([book_id] = @Original_book_id) AND ([entry_id] = @Original_entry_id) AND ([taken_by] = @Original_taken_by) AND ([date_from] = @Original_date_from) AND ([date_to] = @Original_date_to));
-SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE (entry_id = @entry_id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [books_history] SET [book_id] = @book_id, [entry_id] = @entry_id, [taken_by] = @taken_by, [date_from] = @date_from, [is_returned] = @is_returned WHERE (([book_id] = @Original_book_id) AND ([entry_id] = @Original_entry_id) AND ([taken_by] = @Original_taken_by) AND ([date_from] = @Original_date_from) AND ((@IsNull_is_returned = 1 AND [is_returned] IS NULL) OR ([is_returned] = @Original_is_returned)));
+SELECT book_id, entry_id, taken_by, date_from, is_returned FROM books_history WHERE (entry_id = @entry_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@book_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "book_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@entry_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entry_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@taken_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "taken_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_from", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_from", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_to", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_to", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@is_returned", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "is_returned", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_book_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "book_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_entry_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entry_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_taken_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "taken_by", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date_from", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_from", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date_to", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_to", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_is_returned", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "is_returned", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_is_returned", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "is_returned", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4448,7 +4462,7 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT *\r\nFROM books_history";
+            this._commandCollection[0].CommandText = "SELECT book_id, entry_id, taken_by, date_from, is_returned FROM books_history";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -4509,7 +4523,7 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_book_id, int Original_entry_id, string Original_taken_by, System.DateTime Original_date_from, System.DateTime Original_date_to) {
+        public virtual int Delete(int Original_book_id, int Original_entry_id, string Original_taken_by, System.DateTime Original_date_from, global::System.Nullable<byte> Original_is_returned) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_book_id));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_entry_id));
             if ((Original_taken_by == null)) {
@@ -4519,7 +4533,14 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
                 this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_taken_by));
             }
             this.Adapter.DeleteCommand.Parameters[3].Value = ((System.DateTime)(Original_date_from));
-            this.Adapter.DeleteCommand.Parameters[4].Value = ((System.DateTime)(Original_date_to));
+            if ((Original_is_returned.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((byte)(Original_is_returned.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -4540,7 +4561,7 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int book_id, int entry_id, string taken_by, System.DateTime date_from, System.DateTime date_to) {
+        public virtual int Insert(int book_id, int entry_id, string taken_by, System.DateTime date_from, global::System.Nullable<byte> is_returned) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(book_id));
             this.Adapter.InsertCommand.Parameters[1].Value = ((int)(entry_id));
             if ((taken_by == null)) {
@@ -4550,7 +4571,12 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
                 this.Adapter.InsertCommand.Parameters[2].Value = ((string)(taken_by));
             }
             this.Adapter.InsertCommand.Parameters[3].Value = ((System.DateTime)(date_from));
-            this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(date_to));
+            if ((is_returned.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((byte)(is_returned.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -4571,7 +4597,7 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int book_id, int entry_id, string taken_by, System.DateTime date_from, System.DateTime date_to, int Original_book_id, int Original_entry_id, string Original_taken_by, System.DateTime Original_date_from, System.DateTime Original_date_to) {
+        public virtual int Update(int book_id, int entry_id, string taken_by, System.DateTime date_from, global::System.Nullable<byte> is_returned, int Original_book_id, int Original_entry_id, string Original_taken_by, System.DateTime Original_date_from, global::System.Nullable<byte> Original_is_returned) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(book_id));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(entry_id));
             if ((taken_by == null)) {
@@ -4581,7 +4607,12 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
                 this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(taken_by));
             }
             this.Adapter.UpdateCommand.Parameters[3].Value = ((System.DateTime)(date_from));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((System.DateTime)(date_to));
+            if ((is_returned.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((byte)(is_returned.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
             this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_book_id));
             this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_entry_id));
             if ((Original_taken_by == null)) {
@@ -4591,7 +4622,14 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
                 this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_taken_by));
             }
             this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(Original_date_from));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((System.DateTime)(Original_date_to));
+            if ((Original_is_returned.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((byte)(Original_is_returned.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -4612,8 +4650,8 @@ SELECT book_id, entry_id, taken_by, date_from, date_to FROM books_history WHERE 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int book_id, string taken_by, System.DateTime date_from, System.DateTime date_to, int Original_book_id, int Original_entry_id, string Original_taken_by, System.DateTime Original_date_from, System.DateTime Original_date_to) {
-            return this.Update(book_id, Original_entry_id, taken_by, date_from, date_to, Original_book_id, Original_entry_id, Original_taken_by, Original_date_from, Original_date_to);
+        public virtual int Update(int book_id, string taken_by, System.DateTime date_from, global::System.Nullable<byte> is_returned, int Original_book_id, int Original_entry_id, string Original_taken_by, System.DateTime Original_date_from, global::System.Nullable<byte> Original_is_returned) {
+            return this.Update(book_id, Original_entry_id, taken_by, date_from, is_returned, Original_book_id, Original_entry_id, Original_taken_by, Original_date_from, Original_is_returned);
         }
     }
     
@@ -4964,7 +5002,7 @@ INNER JOIN authors as a
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT a.taken_by, b.Title, a.date_from\r\nFROM books_history as a\r\nINNER JOIN book" +
-                "s as b\r\n    ON a.book_id = b.book_id\r\nWHERE a.date_to IS null";
+                "s as b\r\n    ON a.book_id = b.book_id\r\nWHERE a.is_returned = 0";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

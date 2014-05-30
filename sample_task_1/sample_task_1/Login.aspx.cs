@@ -37,7 +37,6 @@ namespace sample_task_1
                 else
                     LoginLabel.Text = "Wrong username/pass";
             }
-
         }
     }
 }

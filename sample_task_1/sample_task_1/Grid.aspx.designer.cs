@@ -58,6 +58,33 @@ namespace sample_task_1 {
         protected global::System.Web.UI.WebControls.Button SendMail;
         
         /// <summary>
+        /// Registration control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Registration;
+        
+        /// <summary>
+        /// Login control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Login;
+        
+        /// <summary>
+        /// BooksHistory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BooksHistory;
+        
+        /// <summary>
         /// BooksGrid control.
         /// </summary>
         /// <remarks>

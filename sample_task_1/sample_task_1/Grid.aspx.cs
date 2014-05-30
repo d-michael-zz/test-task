@@ -111,12 +111,20 @@ namespace sample_task_1
         protected void TakenBooks_Click(object sender, EventArgs e)
         {
             ViewState["filter"] = 0;
-            ViewState["username"] = (string)(Session["email"]);
+            if (Session["email"] != null)
+                ViewState["username"] = (string)(Session["email"]);
+            else
+                ViewState["username"] = "";
             //ViewState["username"] = "test1@test.com";
 
             GridBAL booksLogic = new GridBAL();
-            BooksGrid.DataSource = booksLogic.GetDataByUsername(ViewState["username"].ToString());
-            BooksGrid.DataBind();
+            if (ViewState["username"].ToString() != "")
+            {
+                BooksGrid.DataSource = booksLogic.GetDataByUsername(ViewState["username"].ToString());
+                BooksGrid.DataBind();
+            }
+            else
+                TestLabel.Text = "You are not logged in";
         }
 
         protected void SendMail_Click(object sender, EventArgs e)
@@ -153,7 +161,7 @@ namespace sample_task_1
             for(int i = 0; i < users.Count; i++)
             {
                 var toAddress = new MailAddress(users[i], "To library user");
-                string tempBody = "Books taken: " + titles[i] + ", " + dates[i];
+                string tempBody = "You took the following books in our library: " + titles[i] + ", " + dates[i];
                 string body = tempBody;
 
                 using (var message = new MailMessage(fromAddress, toAddress)
@@ -168,6 +176,21 @@ namespace sample_task_1
 
             }
 
+        }
+
+        protected void Registration_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Registration.aspx");
+        }
+
+        protected void Login_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Login.aspx");
+        }
+
+        protected void BooksHistory_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/BookHistory.aspx");
         }
     }
 
