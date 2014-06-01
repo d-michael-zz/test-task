@@ -16,5 +16,10 @@ namespace sample_task_1
             BooksHistory.DataSource = booksLogic.GetData();
             BooksHistory.DataBind();
         }
+
+        protected void Return_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Grid.aspx");
+        }
     }
 }

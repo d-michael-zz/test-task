@@ -34,6 +34,7 @@
                 </th>
             </tr> 
         </table>
+        <asp:Button ID="Return" runat="server" Text="Back to main page" OnClick="Return_Click" />
     </div>
     </form>
 </body>

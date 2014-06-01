@@ -8,7 +8,6 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div style="margin: 0px auto; padding-left: 370px; padding-right: 30px; overflow: auto;">
         <div>
             <table>
                 <caption>Registration</caption>
@@ -35,8 +34,8 @@
                     </th>
                 </tr> 
             </table>
+            <asp:Button ID="Return" runat="server" Text="Back to main page" OnClick="Return_Click" />
         </div>
-    </div>
     </form>
 </body>
 </html>

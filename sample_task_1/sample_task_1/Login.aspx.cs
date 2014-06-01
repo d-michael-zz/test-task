@@ -38,5 +38,10 @@ namespace sample_task_1
                     LoginLabel.Text = "Wrong username/pass";
             }
         }
+
+        protected void Return_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Grid.aspx");
+        }
     }
 }

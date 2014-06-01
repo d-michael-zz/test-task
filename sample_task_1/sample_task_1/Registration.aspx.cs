@@ -27,5 +27,10 @@ namespace sample_task_1
             if (result == true)
                 SaveLabel.Text = "User added";
         }
+
+        protected void Return_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Grid.aspx");
+        }
     }
 }
