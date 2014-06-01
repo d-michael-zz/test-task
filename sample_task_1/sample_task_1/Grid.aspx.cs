@@ -200,9 +200,13 @@ namespace sample_task_1
             if (Session["email"] != null)
             {
                 int book_id = Convert.ToInt32(TakeBookID.Text);
+
                 HistoryBAL historyLogic = new HistoryBAL();
-                historyLogic.AddEntry((string)(Session["email"]), book_id);
-                TestLabel.Text = "Book taken!";
+                bool result = historyLogic.AddEntry((string)(Session["email"]), book_id);
+                if(result == true)
+                    TestLabel.Text = "Book taken!";
+                else
+                    TestLabel.Text = "Zero books left";
             }
             else
                 TestLabel.Text = "You are not logged in";

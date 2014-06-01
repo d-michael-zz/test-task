@@ -36,11 +36,21 @@ namespace BAL
             DAL.DataSet1.books_historyDataTable entries = new DAL.DataSet1.books_historyDataTable();
             DAL.DataSet1.books_historyRow entry = entries.Newbooks_historyRow();
 
+            BooksBAL booksLogic = new BooksBAL();
+            byte books_left = booksLogic.GetBooksLeft(BookID);
+
+            if (books_left > 0)
+            {
+                books_left = (byte)(books_left - 1);
+                booksLogic.UpdateBooksLeft(BookID, books_left);
+            }
+            else
+                return false;
+
             entry.date_from =  DateTime.Today;
             entry.is_returned = 0;
             entry.taken_by = TakenBy;
             entry.book_id = BookID;
-
 
             // Add the new entry
             entries.Addbooks_historyRow(entry);
@@ -58,6 +68,10 @@ namespace BAL
 
             DAL.DataSet1.books_historyDataTable entries = Adapter.GetData();
 
+            BooksBAL booksLogic = new BooksBAL();
+            byte books_left = booksLogic.GetBooksLeft(BookID);
+
+
             for (int i = 0; i < entries.Rows.Count; i++)
             {
                 if ((Convert.ToInt32(entries.Rows[i]["book_id"]) == BookID) 
@@ -66,6 +80,8 @@ namespace BAL
                 {
                     entries.Rows[i]["is_returned"] = 1;
                     int rowsAffected = Adapter.Update(entries.Rows[i]);
+                    books_left = (byte)(books_left + 1);
+                    booksLogic.UpdateBooksLeft(BookID, books_left);
                     //return Convert.ToInt32(entries.Rows[i]["entry_id"]);
                     return rowsAffected == 1;
                 }

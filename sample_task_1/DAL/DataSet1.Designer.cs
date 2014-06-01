@@ -1646,6 +1646,8 @@ namespace DAL {
             
             private global::System.Data.DataColumn columnis_returned;
             
+            private global::System.Data.DataColumn columnBooksLeft;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public books_historyDataTable() {
@@ -1721,6 +1723,14 @@ namespace DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn BooksLeftColumn {
+                get {
+                    return this.columnBooksLeft;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1756,14 +1766,15 @@ namespace DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public books_historyRow Addbooks_historyRow(int book_id, string taken_by, System.DateTime date_from, byte is_returned) {
+            public books_historyRow Addbooks_historyRow(int book_id, string taken_by, System.DateTime date_from, byte is_returned, byte BooksLeft) {
                 books_historyRow rowbooks_historyRow = ((books_historyRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         book_id,
                         null,
                         taken_by,
                         date_from,
-                        is_returned};
+                        is_returned,
+                        BooksLeft};
                 rowbooks_historyRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowbooks_historyRow);
                 return rowbooks_historyRow;
@@ -1798,6 +1809,7 @@ namespace DAL {
                 this.columntaken_by = base.Columns["taken_by"];
                 this.columndate_from = base.Columns["date_from"];
                 this.columnis_returned = base.Columns["is_returned"];
+                this.columnBooksLeft = base.Columns["BooksLeft"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1813,6 +1825,8 @@ namespace DAL {
                 base.Columns.Add(this.columndate_from);
                 this.columnis_returned = new global::System.Data.DataColumn("is_returned", typeof(byte), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnis_returned);
+                this.columnBooksLeft = new global::System.Data.DataColumn("BooksLeft", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBooksLeft);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnentry_id}, true));
                 this.columnbook_id.AllowDBNull = false;
@@ -1825,6 +1839,7 @@ namespace DAL {
                 this.columntaken_by.MaxLength = 50;
                 this.columndate_from.AllowDBNull = false;
                 this.columnis_returned.AllowDBNull = false;
+                this.columnBooksLeft.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2808,6 +2823,34 @@ namespace DAL {
                     this[this.tablebooks_history.is_returnedColumn] = value;
                 }
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public byte BooksLeft {
+                get {
+                    try {
+                        return ((byte)(this[this.tablebooks_history.BooksLeftColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BooksLeft\' in table \'books_history\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablebooks_history.BooksLeftColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsBooksLeftNull() {
+                return this.IsNull(this.tablebooks_history.BooksLeftColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetBooksLeftNull() {
+                this[this.tablebooks_history.BooksLeftColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -3284,6 +3327,28 @@ namespace DAL.DataSet1TableAdapters {
             tableMapping.ColumnMappings.Add("Title", "Title");
             tableMapping.ColumnMappings.Add("BooksLeft", "BooksLeft");
             this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [books] WHERE (([book_id] = @Original_book_id))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_book_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "book_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [books] ([book_id], [Title], [BooksLeft]) VALUES (@book_id, @Title, @" +
+                "BooksLeft)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@book_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "book_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Title", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Title", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BooksLeft", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BooksLeft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = "UPDATE [books] SET [book_id] = @book_id, [Title] = @Title, [BooksLeft] = @BooksLe" +
+                "ft WHERE (([book_id] = @Original_book_id))";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@book_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "book_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Title", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Title", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BooksLeft", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BooksLeft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_book_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "book_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3325,6 +3390,124 @@ namespace DAL.DataSet1TableAdapters {
             DataSet1.booksDataTable dataTable = new DataSet1.booksDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(DataSet1.booksDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(DataSet1 dataSet) {
+            return this.Adapter.Update(dataSet, "books");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_book_id) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_book_id));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(int book_id, string Title, byte BooksLeft) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(book_id));
+            if ((Title == null)) {
+                throw new global::System.ArgumentNullException("Title");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(Title));
+            }
+            this.Adapter.InsertCommand.Parameters[2].Value = ((byte)(BooksLeft));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(int book_id, string Title, byte BooksLeft, int Original_book_id) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(book_id));
+            if ((Title == null)) {
+                throw new global::System.ArgumentNullException("Title");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(Title));
+            }
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((byte)(BooksLeft));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_book_id));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string Title, byte BooksLeft, int Original_book_id) {
+            return this.Update(Original_book_id, Title, BooksLeft, Original_book_id);
         }
     }
     
@@ -4423,6 +4606,7 @@ SELECT user_id, email, password FROM users WHERE (user_id = @user_id)";
             tableMapping.ColumnMappings.Add("taken_by", "taken_by");
             tableMapping.ColumnMappings.Add("date_from", "date_from");
             tableMapping.ColumnMappings.Add("is_returned", "is_returned");
+            tableMapping.ColumnMappings.Add("BooksLeft", "BooksLeft");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
@@ -4437,10 +4621,8 @@ SELECT user_id, email, password FROM users WHERE (user_id = @user_id)";
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_is_returned", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "is_returned", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [books_history] ([book_id], [taken_by], [date_from], [is_returned]) V" +
-                "ALUES (@book_id, @taken_by, @date_from, @is_returned);\r\nSELECT book_id, entry_id" +
-                ", taken_by, date_from, is_returned FROM books_history WHERE (entry_id = SCOPE_ID" +
-                "ENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [books_history] ([book_id], [taken_by], [date_from], [is_returned]) VALUES (@book_id, @taken_by, @date_from, @is_returned);
+SELECT book_id, entry_id, taken_by, date_from, is_returned, (SELECT BooksLeft FROM books WHERE (book_id = books_history.book_id)) AS BooksLeft FROM books_history WHERE (entry_id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@book_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "book_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@taken_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "taken_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -4449,7 +4631,7 @@ SELECT user_id, email, password FROM users WHERE (user_id = @user_id)";
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = @"UPDATE [books_history] SET [book_id] = @book_id, [taken_by] = @taken_by, [date_from] = @date_from, [is_returned] = @is_returned WHERE (([book_id] = @Original_book_id) AND ([entry_id] = @Original_entry_id) AND ([taken_by] = @Original_taken_by) AND ([date_from] = @Original_date_from) AND ([is_returned] = @Original_is_returned));
-SELECT book_id, entry_id, taken_by, date_from, is_returned FROM books_history WHERE (entry_id = @entry_id)";
+SELECT book_id, entry_id, taken_by, date_from, is_returned, (SELECT BooksLeft FROM books WHERE (book_id = books_history.book_id)) AS BooksLeft FROM books_history WHERE (entry_id = @entry_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@book_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "book_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@taken_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "taken_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -4476,7 +4658,8 @@ SELECT book_id, entry_id, taken_by, date_from, is_returned FROM books_history WH
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT * FROM books_history";
+            this._commandCollection[0].CommandText = "SELECT *, (SELECT BooksLeft \r\n                   FROM books \r\n                   " +
+                "WHERE books.book_id = books_history.book_id) as BooksLeft \r\nFROM books_history";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -5033,6 +5216,8 @@ INNER JOIN authors as a
         
         private UpdateOrderOption _updateOrder;
         
+        private booksTableAdapter _booksTableAdapter;
+        
         private authorsTableAdapter _authorsTableAdapter;
         
         private books_authorsTableAdapter _books_authorsTableAdapter;
@@ -5053,6 +5238,20 @@ INNER JOIN authors as a
             }
             set {
                 this._updateOrder = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public booksTableAdapter booksTableAdapter {
+            get {
+                return this._booksTableAdapter;
+            }
+            set {
+                this._booksTableAdapter = value;
             }
         }
         
@@ -5131,6 +5330,10 @@ INNER JOIN authors as a
                 if ((this._connection != null)) {
                     return this._connection;
                 }
+                if (((this._booksTableAdapter != null) 
+                            && (this._booksTableAdapter.Connection != null))) {
+                    return this._booksTableAdapter.Connection;
+                }
                 if (((this._authorsTableAdapter != null) 
                             && (this._authorsTableAdapter.Connection != null))) {
                     return this._authorsTableAdapter.Connection;
@@ -5160,6 +5363,9 @@ INNER JOIN authors as a
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
+                if ((this._booksTableAdapter != null)) {
+                    count = (count + 1);
+                }
                 if ((this._authorsTableAdapter != null)) {
                     count = (count + 1);
                 }
@@ -5183,6 +5389,15 @@ INNER JOIN authors as a
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateUpdatedRows(DataSet1 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._booksTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.books.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._booksTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._authorsTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.authors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -5229,6 +5444,14 @@ INNER JOIN authors as a
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateInsertedRows(DataSet1 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._booksTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.books.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._booksTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._authorsTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.authors.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -5303,6 +5526,14 @@ INNER JOIN authors as a
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._booksTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.books.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._booksTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             return result;
         }
         
@@ -5341,6 +5572,11 @@ INNER JOIN authors as a
             }
             if ((dataSet.HasChanges() == false)) {
                 return 0;
+            }
+            if (((this._booksTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._booksTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
             }
             if (((this._authorsTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._authorsTableAdapter.Connection) == false))) {
@@ -5394,6 +5630,15 @@ INNER JOIN authors as a
             try {
                 // ---- Prepare for update -----------
                 //
+                if ((this._booksTableAdapter != null)) {
+                    revertConnections.Add(this._booksTableAdapter, this._booksTableAdapter.Connection);
+                    this._booksTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._booksTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._booksTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._booksTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._booksTableAdapter.Adapter);
+                    }
+                }
                 if ((this._authorsTableAdapter != null)) {
                     revertConnections.Add(this._authorsTableAdapter, this._authorsTableAdapter.Connection);
                     this._authorsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -5487,6 +5732,10 @@ INNER JOIN authors as a
             finally {
                 if (workConnOpened) {
                     workConnection.Close();
+                }
+                if ((this._booksTableAdapter != null)) {
+                    this._booksTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._booksTableAdapter]));
+                    this._booksTableAdapter.Transaction = null;
                 }
                 if ((this._authorsTableAdapter != null)) {
                     this._authorsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._authorsTableAdapter]));
