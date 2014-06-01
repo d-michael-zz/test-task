@@ -12,10 +12,18 @@
             <asp:Button ID="AllBooks" runat="server" Text="All books" OnClick="AllBooks_Click" />
             <asp:Button ID="AvailableBooks" runat="server" Text="Available books" OnClick="AvailableBooks_Click" />
             <asp:Button ID="TakenBooks" runat="server" Text="Taken by you" OnClick="TakenBooks_Click" />
-            <asp:Button ID="SendMail" runat="server" Text="Send reminders" OnClick="SendMail_Click" />
+            <br />
             <asp:Button ID="Registration" runat="server" Text="Registration" OnClick="Registration_Click" />
             <asp:Button ID="Login" runat="server" Text="Log in" OnClick="Login_Click" />
+            <br />
             <asp:Button ID="BooksHistory" runat="server" Text="Books history" OnClick="BooksHistory_Click" />
+            <asp:Button ID="SendMail" runat="server" Text="Send reminders" OnClick="SendMail_Click" />
+            <br />
+            <asp:Button ID="TakeBook" runat="server" Text="TakeBook" OnClick="TakeBook_Click" />
+            <asp:TextBox ID="TakeBookID" runat="server">Input book id</asp:TextBox>
+            <br />
+            <asp:Button ID="ReturnBook" runat="server" Text="ReturnBook" OnClick="ReturnBook_Click" />
+            <asp:TextBox ID="ReturnBookID" runat="server">Input book id</asp:TextBox>
         </div>
         <div>
             <asp:GridView ID="BooksGrid" runat="server" AllowSorting="True" allowpaging="true" autogeneratecolumns="true"

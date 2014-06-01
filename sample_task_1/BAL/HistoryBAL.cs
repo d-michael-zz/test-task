@@ -22,12 +22,71 @@ namespace BAL
             }
         }
 
-
         [System.ComponentModel.DataObjectMethodAttribute
             (System.ComponentModel.DataObjectMethodType.Select, true)]
         public DAL.DataSet1.books_historyDataTable GetData()
         {
             return Adapter.GetData();
+        }
+
+        [System.ComponentModel.DataObjectMethodAttribute
+            (System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public bool AddEntry(string TakenBy, int BookID)
+        {
+            DAL.DataSet1.books_historyDataTable entries = new DAL.DataSet1.books_historyDataTable();
+            DAL.DataSet1.books_historyRow entry = entries.Newbooks_historyRow();
+
+            entry.date_from =  DateTime.Today;
+            entry.is_returned = 0;
+            entry.taken_by = TakenBy;
+            entry.book_id = BookID;
+
+
+            // Add the new entry
+            entries.Addbooks_historyRow(entry);
+            int rowsAffected = Adapter.Update(entries);
+
+            // Return true if one row was inserted
+            return rowsAffected == 1;
+
+        }
+
+        [System.ComponentModel.DataObjectMethodAttribute
+        (System.ComponentModel.DataObjectMethodType.Update, true)]
+        public bool UpdateEntry(string TakenBy, int BookID)
+        {
+
+            DAL.DataSet1.books_historyDataTable entries = Adapter.GetData();
+
+            for (int i = 0; i < entries.Rows.Count; i++)
+            {
+                if ((Convert.ToInt32(entries.Rows[i]["book_id"]) == BookID) 
+                    && (entries.Rows[i]["taken_by"].ToString() == TakenBy) 
+                    && (Convert.ToByte(entries.Rows[i]["is_returned"]) == 0))
+                {
+                    entries.Rows[i]["is_returned"] = 1;
+                    int rowsAffected = Adapter.Update(entries.Rows[i]);
+                    //return Convert.ToInt32(entries.Rows[i]["entry_id"]);
+                    return rowsAffected == 1;
+                }
+            }
+
+            return false;
+        }
+
+
+
+
+        public List<string> GetBookTitles()
+        {
+            List<string> titles = new List<string>();
+            DAL.DataSet1.books_historyDataTable grid = Adapter.GetData();
+
+            foreach (DataRow row in grid.Rows)
+            {
+                titles.Add(row[1].ToString());
+            }
+            return titles;
         }
 
     }

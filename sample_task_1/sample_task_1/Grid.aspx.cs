@@ -192,6 +192,36 @@ namespace sample_task_1
         {
             Response.Redirect("~/BookHistory.aspx");
         }
+
+
+        //Only for logged useres!
+        protected void TakeBook_Click(object sender, EventArgs e)
+        {
+            if (Session["email"] != null)
+            {
+                int book_id = Convert.ToInt32(TakeBookID.Text);
+                HistoryBAL historyLogic = new HistoryBAL();
+                historyLogic.AddEntry((string)(Session["email"]), book_id);
+                TestLabel.Text = "Book taken!";
+            }
+            else
+                TestLabel.Text = "You are not logged in";
+        }
+
+        protected void ReturnBook_Click(object sender, EventArgs e)
+        {
+            if (Session["email"] != null)
+            {
+                int book_id = Convert.ToInt32(ReturnBookID.Text);
+                HistoryBAL historyLogic = new HistoryBAL();
+                bool result = historyLogic.UpdateEntry((string)(Session["email"]), book_id);
+                if(result == true)
+                    TestLabel.Text = "Book returned!";
+                //TestLabel.Text = result.ToString();
+            }
+            else
+                TestLabel.Text = "You are not logged in";
+        }
     }
 
 }

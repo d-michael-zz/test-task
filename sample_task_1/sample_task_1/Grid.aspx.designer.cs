@@ -49,15 +49,6 @@ namespace sample_task_1 {
         protected global::System.Web.UI.WebControls.Button TakenBooks;
         
         /// <summary>
-        /// SendMail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SendMail;
-        
-        /// <summary>
         /// Registration control.
         /// </summary>
         /// <remarks>
@@ -83,6 +74,51 @@ namespace sample_task_1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BooksHistory;
+        
+        /// <summary>
+        /// SendMail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SendMail;
+        
+        /// <summary>
+        /// TakeBook control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button TakeBook;
+        
+        /// <summary>
+        /// TakeBookID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TakeBookID;
+        
+        /// <summary>
+        /// ReturnBook control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ReturnBook;
+        
+        /// <summary>
+        /// ReturnBookID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ReturnBookID;
         
         /// <summary>
         /// BooksGrid control.
