@@ -49,6 +49,8 @@ namespace BAL
                     }
                 }
             }
+
+            grid.Columns["book_id"].SetOrdinal(0);
             
             return grid; //Adapter.GetData();
         }
@@ -77,6 +79,7 @@ namespace BAL
 
             grid.Columns.Remove("entry_id");
             grid.Columns.Remove("BooksLeft");
+            grid.Columns["book_id"].SetOrdinal(0);
 
             return grid;
         }

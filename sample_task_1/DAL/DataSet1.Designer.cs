@@ -1964,6 +1964,8 @@ namespace DAL {
             
             private global::System.Data.DataColumn columnBooksLeft;
             
+            private global::System.Data.DataColumn columnbook_id;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public gridDataTable() {
@@ -2023,6 +2025,14 @@ namespace DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn book_idColumn {
+                get {
+                    return this.columnbook_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2058,12 +2068,13 @@ namespace DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public gridRow AddgridRow(string title, string AuthorName, byte BooksLeft) {
+            public gridRow AddgridRow(string title, string AuthorName, byte BooksLeft, int book_id) {
                 gridRow rowgridRow = ((gridRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         title,
                         AuthorName,
-                        BooksLeft};
+                        BooksLeft,
+                        book_id};
                 rowgridRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowgridRow);
                 return rowgridRow;
@@ -2089,6 +2100,7 @@ namespace DAL {
                 this.columntitle = base.Columns["title"];
                 this.columnAuthorName = base.Columns["AuthorName"];
                 this.columnBooksLeft = base.Columns["BooksLeft"];
+                this.columnbook_id = base.Columns["book_id"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2100,11 +2112,14 @@ namespace DAL {
                 base.Columns.Add(this.columnAuthorName);
                 this.columnBooksLeft = new global::System.Data.DataColumn("BooksLeft", typeof(byte), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnBooksLeft);
+                this.columnbook_id = new global::System.Data.DataColumn("book_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnbook_id);
                 this.columntitle.AllowDBNull = false;
                 this.columntitle.MaxLength = 100;
                 this.columnAuthorName.AllowDBNull = false;
                 this.columnAuthorName.MaxLength = 50;
                 this.columnBooksLeft.AllowDBNull = false;
+                this.columnbook_id.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2839,6 +2854,17 @@ namespace DAL {
                 }
                 set {
                     this[this.tablegrid.BooksLeftColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int book_id {
+                get {
+                    return ((int)(this[this.tablegrid.book_idColumn]));
+                }
+                set {
+                    this[this.tablegrid.book_idColumn] = value;
                 }
             }
         }
@@ -4742,6 +4768,7 @@ SELECT book_id, entry_id, taken_by, date_from, is_returned FROM books_history WH
             tableMapping.ColumnMappings.Add("title", "title");
             tableMapping.ColumnMappings.Add("AuthorName", "AuthorName");
             tableMapping.ColumnMappings.Add("BooksLeft", "BooksLeft");
+            tableMapping.ColumnMappings.Add("book_id", "book_id");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -4758,13 +4785,13 @@ SELECT book_id, entry_id, taken_by, date_from, is_returned FROM books_history WH
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT b.title,  a.AuthorName, b.BooksLeft\r\nFROM books as b\r\nINNER JOIN books_aut" +
-                "hors as c\r\n    ON b.book_id = c.book_id\r\nINNER JOIN authors as a\r\n    ON c.autho" +
-                "r_id= a.author_id\r\n";
+            this._commandCollection[0].CommandText = "SELECT b.title, c.book_id, a.AuthorName, b.BooksLeft\r\nFROM books as b\r\nINNER JOIN" +
+                " books_authors as c\r\n    ON b.book_id = c.book_id\r\nINNER JOIN authors as a\r\n    " +
+                "ON c.author_id= a.author_id\r\n";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT d.entry_id, b.title, a.AuthorName, b.BooksLeft, d.taken_by, d.date_from
+            this._commandCollection[1].CommandText = @"SELECT d.entry_id, b.title, a.AuthorName, b.BooksLeft, d.taken_by, d.date_from, c.book_id
 FROM books_history as d
 INNER JOIN books as b
    ON d.book_id = b.book_id

@@ -248,7 +248,7 @@ SELECT book_id, entry_id, taken_by, date_from, is_returned FROM books_history WH
               <DbSource ConnectionRef="sample_task_dbConnectionString1 (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT b.title,  a.AuthorName, b.BooksLeft
+                    <CommandText>SELECT b.title, c.book_id, a.AuthorName, b.BooksLeft
 FROM books as b
 INNER JOIN books_authors as c
     ON b.book_id = c.book_id
@@ -264,12 +264,13 @@ INNER JOIN authors as a
               <Mapping SourceColumn="title" DataSetColumn="title" />
               <Mapping SourceColumn="AuthorName" DataSetColumn="AuthorName" />
               <Mapping SourceColumn="BooksLeft" DataSetColumn="BooksLeft" />
+              <Mapping SourceColumn="book_id" DataSetColumn="book_id" />
             </Mappings>
             <Sources>
               <DbSource ConnectionRef="sample_task_dbConnectionString1 (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByUsername" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByUsername" GeneratorSourceName="FillByUsername" GetMethodModifier="Public" GetMethodName="GetDataByUsername" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByUsername" UserSourceName="FillByUsername">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT d.entry_id, b.title, a.AuthorName, b.BooksLeft, d.taken_by, d.date_from
+                    <CommandText>SELECT d.entry_id, b.title, a.AuthorName, b.BooksLeft, d.taken_by, d.date_from, c.book_id
 FROM books_history as d
 INNER JOIN books as b
    ON d.book_id = b.book_id
@@ -406,6 +407,7 @@ WHERE a.is_returned = 0</CommandText>
                 </xs:simpleType>
               </xs:element>
               <xs:element name="BooksLeft" msprop:Generator_ColumnVarNameInTable="columnBooksLeft" msprop:Generator_ColumnPropNameInRow="BooksLeft" msprop:Generator_ColumnPropNameInTable="BooksLeftColumn" msprop:Generator_UserColumnName="BooksLeft" type="xs:unsignedByte" />
+              <xs:element name="book_id" msprop:Generator_ColumnVarNameInTable="columnbook_id" msprop:Generator_ColumnPropNameInRow="book_id" msprop:Generator_ColumnPropNameInTable="book_idColumn" msprop:Generator_UserColumnName="book_id" type="xs:int" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
