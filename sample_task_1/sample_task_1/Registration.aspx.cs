@@ -18,11 +18,10 @@ namespace sample_task_1
         protected void BtnSave_Click(object sender, EventArgs e)
         {
             string email = Mail.Text;
-            string pass = Pass.Text;
 
             bool result = false; 
             UsersBAL usersLogic = new UsersBAL();
-            result = usersLogic.AddUser(email, pass);
+            result = usersLogic.AddUser(email);
 
             if (result == true)
                 SaveLabel.Text = "User added";

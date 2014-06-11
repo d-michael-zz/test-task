@@ -18,12 +18,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td> Password </td>
-                    <td>
-                        <asp:TextBox ID="Pass" Width="150px" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
                     <th colspan="2">
                         <asp:Button ID="BtnSave" runat="server" Width="100px" Text="Save" OnClick="BtnSave_Click" />
                     </th>

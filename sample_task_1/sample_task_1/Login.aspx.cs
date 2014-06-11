@@ -18,16 +18,13 @@ namespace sample_task_1
         protected void LoginBtn_Click(object sender, EventArgs e)
         {
             string log_email = Mail.Text;
-            string log_pass = Pass.Text;
             UsersBAL usersLogic = new UsersBAL();
             List<string> users = new List<string>();
             users = usersLogic.GetUsersList();
-            List<string> passwords = new List<string>();
-            passwords = usersLogic.GetPassList();
 
             for(int i = 0; i < users.Count; i++)
             {
-                if (users[i] == log_email && passwords[i] == log_pass)
+                if (users[i] == log_email)
                 {
                     //login;
                     LoginLabel.Text = "Success";
@@ -35,7 +32,7 @@ namespace sample_task_1
                     break;
                 }
                 else
-                    LoginLabel.Text = "Wrong username/pass";
+                    LoginLabel.Text = "Wrong username";
             }
         }
 

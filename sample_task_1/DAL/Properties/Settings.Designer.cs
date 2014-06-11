@@ -37,8 +37,8 @@ namespace DAL.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\v11.0;AttachDbFilename=C:\\TestFolder\\sample_task_db.mdf;Int" +
-            "egrated Security=True;Connect Timeout=30")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=\". \\SQLEXPRESS\";Initial Catalog=sample_task_db;Integrated Security=Tr" +
+            "ue")]
         public string sample_task_dbConnectionString1 {
             get {
                 return ((string)(this["sample_task_dbConnectionString1"]));
